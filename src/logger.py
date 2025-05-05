@@ -13,7 +13,7 @@ os.makedirs(logs_path, exist_ok=True)
 LOG_FILE_PATH = os.path.join(logs_path, LOG_FILE)
 
 # Create a custom logger (avoid using the root logger)
-logger = logging.getLogger("Logger")  # Name your logger
+logger = logging.getLogger("AppLogger")  # Name your logger
 logger.setLevel(logging.INFO)  # Set the logging level
 
 # Create a rotating file handler for log rotation (e.g., 5 MB per file, max 3 backups)
