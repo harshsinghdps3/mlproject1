@@ -1,31 +1,30 @@
-
+# logger.py
 import logging
 import os
 from datetime import datetime
-from logging.handlers import RotatingFileHandler  # For log rotation
+from logging.handlers import RotatingFileHandler
 
-# Create the log file name with timestamp
-LOG_FILE = f"{datetime.now().strftime('%m_%d_%Y_%H_%M_%S')}.log"
-# Create the logs directory path in the current working directory
-logs_path = os.path.join(os.getcwd(), "logs")
-# Ensure the logs directory exists
-os.makedirs(logs_path, exist_ok=True)
-# Create the full path to the log file
-LOG_FILE_PATH = os.path.join(logs_path, LOG_FILE)
+# Define logs directory and create it if it doesn't exist
+logs_dir = os.path.join(os.getcwd(), "logs")
+os.makedirs(logs_dir, exist_ok=True)
 
-# Create a custom logger (avoid using the root logger)
-logger = logging.getLogger("AppLogger")  # Name your logger
-logger.setLevel(logging.INFO)  # Set the logging level
+# Define log file path with timestamp
+LOG_FILE_PATH = os.path.join(logs_dir, f"{datetime.now().strftime('%m_%d_%Y_%H_%M_%S')}.log")
 
-# Create a rotating file handler for log rotation (e.g., 5 MB per file, max 3 backups)
-handler = RotatingFileHandler(
-    LOG_FILE_PATH, maxBytes=5*1024*1024, backupCount=3  # 5 MB per file, keep 3 backups
-)
-# Define the log message format
+# Get or create a logger and set its level
+logger = logging.getLogger("AppLogger")
+logger.setLevel(logging.INFO)
+
+# Create and configure a rotating file handler
+handler = RotatingFileHandler(LOG_FILE_PATH, maxBytes=5*1024*1024, backupCount=3)
 formatter = logging.Formatter("[ %(asctime)s ] %(lineno)d %(name)s - %(levelname)s - %(message)s")
-handler.setFormatter(formatter)  # Attach formatter to handler
-logger.addHandler(handler)  # Attach handler to logger
+handler.setFormatter(formatter)
+
+# Add the handler to the logger (avoiding duplicates if reloaded)
+if not logger.handlers:
+    logger.addHandler(handler)
 
 
 if __name__ == "__main__":
-    logger.info("Logging has started")  # Use the custom logger
+    logger.info("Logging has started")
+    
