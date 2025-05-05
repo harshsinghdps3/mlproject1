@@ -1,3 +1,4 @@
+
 import logging
 import os
 from datetime import datetime
@@ -25,10 +26,6 @@ formatter = logging.Formatter("[ %(asctime)s ] %(lineno)d %(name)s - %(levelname
 handler.setFormatter(formatter)  # Attach formatter to handler
 logger.addHandler(handler)  # Attach handler to logger
 
-# Optional: Add a console handler to also print logs to the console
-console_handler = logging.StreamHandler()
-console_handler.setFormatter(formatter)
-logger.addHandler(console_handler)
 
 if __name__ == "__main__":
     logger.info("Logging has started")  # Use the custom logger
