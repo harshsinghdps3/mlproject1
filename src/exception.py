@@ -1,6 +1,6 @@
 import sys
 import logging
-from src.logger import logger
+from src.logger import logging
 
 #custom exception
 class CustomException(Exception):
@@ -23,6 +23,6 @@ if __name__ == "__main__":
     try:
             a=1/0
     except Exception as e:
-                logger.info("divided by zero")
+                logging.info("divided by zero")
                 raise CustomException(e, sys)
     
