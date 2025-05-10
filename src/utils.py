@@ -33,6 +33,10 @@ def evaluate_models(X_train, y_train,X_test,y_test,models,param):
         for i in range(len(list(models))):
             model = list(models.values())[i]
             para=param[list(models.keys())[i]]
+            model_name = list(models.keys())[i]
+
+            logging.info(f"--- Processing model: {model_name} ---")
+            logging.info(f"Model type: {type(model)}")
 
 
             gs = GridSearchCV(model,para,cv=3)
@@ -44,7 +48,7 @@ def evaluate_models(X_train, y_train,X_test,y_test,models,param):
             
 
         
-            model.fit(X_train,y_train)
+            #model.fit(X_train,y_train)
 
             #model.fit(X_train, y_train)  # Train model
 
@@ -55,10 +59,12 @@ def evaluate_models(X_train, y_train,X_test,y_test,models,param):
             train_model_score = r2_score(y_train, y_train_pred)
 
             test_model_score = r2_score(y_test, y_test_pred)
+            logging.info(f"R2 score on test data for {model_name}: {test_model_score}")
 
-            report[list(models.keys())[i]] = test_model_score
+            report[model_name] = test_model_score
+           
             
-            return report
+        return report
 
       except Exception as e:
         raise CustomException(e, sys)
