@@ -1,42 +1,4 @@
-# Student Exam Performance Indicator
 
-## Project Description
-
-This project is a simple machine learning application that predicts a student's math score based on various input features. The core of the prediction model utilizes a **Linear Regressor**.
-
-The application is built using Flask to provide a web interface for making predictions.
-
-## Features (Inputs)
-
-The model uses the following inputs to predict the math score:
-
-* Gender
-* Race/Ethnicity
-* Parental Level of Education
-* Lunch Type
-* Test Preparation Course
-* Reading Score
-* Writing Score
-
-## Target Variable (Output)
-
-* Math Score (Predicted)
-
-## Model Details
-
-* **Model Used:** Linear Regressor
-* **Performance:** The model achieved a performance metric (accuracy/R-squared) of **0.8804**. *(Note: For a regression model predicting a continuous score, this metric is  R-squared  regression score, . ).*
-
-## Project Structure
-
-
-Okay, here is the English translation of your description:
-
-"I have created a machine learning project which uses a linear regressor. This is a simple model where the math score is predicted after providing some inputs. The accuracy of the linear regressor is 0.8804332983749565. The inputs are gender, race/ethnicity, parental level of education, lunch, test preparation course, reading score, and writing score. Now I need to create a README file, so please create a README file."
-
-Based on this description and the project structure we've seen, here is a draft README file for your project:
-
-Markdown
 
 # Student Exam Performance Indicator
 
@@ -65,7 +27,7 @@ The model uses the following inputs to predict the math score:
 ## Model Details
 
 * **Model Used:** Linear Regressor
-* **Performance:** The model achieved a performance metric (accuracy/R-squared) of **0.8804**. *(Note: For a regression model predicting a continuous score, this metric is likely R-squared or a similar regression score, rather than classification accuracy. Adjust the term 'accuracy' if you know the specific metric used).*
+* **Performance:** The model achieved a performance metric (accuracy/R-squared) of **0.8804**. *(Note: For a regression model predicting a continuous score, this metric is  R-squared .)*
 
 ## Project Structure
 
