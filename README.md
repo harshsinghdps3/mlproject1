@@ -100,7 +100,7 @@ MLPROJECT/
 
 
 5. **Deployed at:**
-'''bash
+'''
 https://mlproject1-gw5c.onrender.com/predictdata
 '''
 
