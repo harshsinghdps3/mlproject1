@@ -98,4 +98,10 @@ MLPROJECT/
     ```
 4.  Open your web browser and go to the address displayed in your terminal (usually `http://127.0.0.1:5000/`).
 
+
+5. **Deployed at:**
+'''bash
+https://mlproject1-gw5c.onrender.com/predictdata
+'''
+
 The web interface will allow you to input the student details and get the predicted math score.
