@@ -20,26 +20,24 @@ def save_object(file_path, obj):
 
         with open(file_path, "wb") as file_obj:
             pickle.dump(obj, file_obj)
+        logging.info(f"Object saved at {file_path}")
 
     except Exception as e:
         raise CustomException(e, sys)
-    logging.info(f"Object saved at {file_path}")
 
 
 def evaluate_models(X_train, y_train,X_test,y_test,models,param):
       try:
         report = {}
 
-        for i in range(len(list(models))):
-            model = list(models.values())[i]
-            para=param[list(models.keys())[i]]
-            model_name = list(models.keys())[i]
+        for model_name, model in models.items():
+            param_grid = param[model_name]
 
             logging.info(f"--- Processing model: {model_name} ---")
             logging.info(f"Model type: {type(model)}")
 
 
-            gs = GridSearchCV(model,para,cv=3)
+            gs = GridSearchCV(model,param_grid,cv=3)
             gs.fit(X_train,y_train)
 
 
@@ -47,16 +45,7 @@ def evaluate_models(X_train, y_train,X_test,y_test,models,param):
             model.fit(X_train,y_train)
             
 
-        
-            #model.fit(X_train,y_train)
-
-            #model.fit(X_train, y_train)  # Train model
-
-            y_train_pred = model.predict(X_train)
-
             y_test_pred = model.predict(X_test)
-
-            train_model_score = r2_score(y_train, y_train_pred)
 
             test_model_score = r2_score(y_test, y_test_pred)
             logging.info(f"R2 score on test data for {model_name}: {test_model_score}")
@@ -73,7 +62,10 @@ def evaluate_models(X_train, y_train,X_test,y_test,models,param):
 def load_object(file_path):
     try:
         with open(file_path, "rb") as file_obj:
-            return pickle.load(file_obj)
-
+            obj = pickle.load(file_obj)
+        logging.info(f"Object loaded from {file_path}")
+        return obj
     except Exception as e:
-        raise CustomException(e, sys)      
+        logging.error(f"Error loading object from {file_path}: {e}")
+        raise CustomException(e, sys)
+
