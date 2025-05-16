@@ -4,102 +4,145 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Student Exam Performance Prediction</title>
-    </head>
+    <!-- Bootstrap CSS -->
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        body {
+            background-color: #f8f9fa; /* Light gray background */
+            padding-top: 20px;
+        }
+        .container {
+            max-width: 800px; /* Max width for the form container */
+        }
+        .card-header {
+            background-color: #007bff; /* Bootstrap primary blue */
+            color: white;
+        }
+        .btn-primary {
+            background-color: #007bff;
+            border-color: #007bff;
+        }
+        .result-box {
+            margin-top: 20px;
+            padding: 15px;
+            background-color: #e9ecef; /* Lighter gray for result */
+            border-radius: .25rem;
+            border: 1px solid #ced4da;
+        }
+        .result-box h2 {
+            color: #155724; /* Dark green for success-like text */
+            margin-bottom: 0;
+        }
+    </style>
+</head>
 <body>
-
-    <div class="login">
-        <h1>Student Exam Performance Indicator</h1>
-
-        <form action="{{ url_for('predict_datapoint')}}" method="post">
-            <h2>
-                <legend>Student Exam Performance Prediction</legend>
-            </h2>
-
-            <div class="mb-3">
-                <label class="form-label" for="genderSelect">Gender</label>
-                <select class="form-control" id="genderSelect" name="gender" required> {# Added id, linked label #}
-                    <option class="placeholder" selected disabled value="">Select your Gender</option>
-                    <option value="male">Male</option>
-                    <option value="female">Female</option>
-                </select>
+    <div class="container">
+        <div class="card shadow-sm">
+            <div class="card-header text-center">
+                <h1>Student Exam Performance Indicator</h1>
             </div>
+            <div class="card-body">
+                <form action="{{ url_for('predict_datapoint')}}" method="post">
+                    <h4 class="mb-4 text-center">
+                        <legend>Enter Student Details for Prediction</legend>
+                    </h4>
 
-            <div class="mb-3">
-                <label class="form-label" for="ethnicitySelect">Race or Ethnicity</label>
-                <select class="form-control" id="ethnicitySelect" name="ethnicity" required> {# Added id, linked label #}
-                    <option class="placeholder" selected disabled value="">Select Ethnicity</option>
-                    <option value="group A">Group A</option>
-                    <option value="group B">Group B</option>
-                    <option value="group C">Group C</option>
-                    <option value="group D">Group D</option>
-                    <option value="group E">Group E</option>
-                </select>
+                    <div class="form-row">
+                        <div class="form-group col-md-6 mb-3">
+                            <label class="form-label" for="genderSelect">Gender</label>
+                            <select class="form-control" id="genderSelect" name="gender" required>
+                                <option class="placeholder" selected disabled value="">Select your Gender</option>
+                                <option value="male">Male</option>
+                                <option value="female">Female</option>
+                            </select>
+                        </div>
+
+                        <div class="form-group col-md-6 mb-3">
+                            <label class="form-label" for="ethnicitySelect">Race or Ethnicity</label>
+                            <select class="form-control" id="ethnicitySelect" name="ethnicity" required>
+                                <option class="placeholder" selected disabled value="">Select Ethnicity</option>
+                                <option value="group A">Group A</option>
+                                <option value="group B">Group B</option>
+                                <option value="group C">Group C</option>
+                                <option value="group D">Group D</option>
+                                <option value="group E">Group E</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="form-group mb-3">
+                        <label class="form-label" for="parentalEducationSelect">Parental Level of Education</label>
+                        <select class="form-control" id="parentalEducationSelect" name="parental level of education"
+                            required>
+                            <option class="placeholder" selected disabled value="">Select Parent Education</option>
+                            <option value="associate's degree">associate's degree</option>
+                            <option value="bachelor's degree">bachelor's degree</option>
+                            <option value="high school">high school</option>
+                            <option value="master's degree">master's degree</option>
+                            <option value="some college">some college</option>
+                            <option value="some high school">some high school</option>
+                        </select>
+                    </div>
+
+                    <div class="form-row">
+                        <div class="form-group col-md-6 mb-3">
+                            <label class="form-label" for="lunchSelect">Lunch Type</label>
+                            <select class="form-control" id="lunchSelect" name="lunch" required>
+                                <option class="placeholder" selected disabled value="">Select Lunch Type</option>
+                                <option value="free/reduced">free/reduced</option>
+                                <option value="standard">standard</option>
+                            </select>
+                        </div>
+
+                        <div class="form-group col-md-6 mb-3">
+                            <label class="form-label" for="testCourseSelect">Test Preparation Course</label>
+                            <select class="form-control" id="testCourseSelect" name="test preparation course"
+                                required>
+                                <option class="placeholder" selected disabled value="">Select Test Course</option>
+                                <option value="none">None</option>
+                                <option value="completed">Completed</option>
+                            </select>
+                        </div>
+                    </div>
+                    
+                    <div class="form-row">
+                        <div class="form-group col-md-6 mb-3">
+                            <label class="form-label" for="writingScoreInput">Writing Score (out of 100)</label>
+                            <input class="form-control" type="number" id="writingScoreInput" name="writing score"
+                                placeholder="Enter Writing score" min='0' max='100' required/>
+                        </div>
+
+                        <div class="form-group col-md-6 mb-3">
+                            <label class="form-label" for="readingScoreInput">Reading Score (out of 100)</label>
+                            <input class="form-control" type="number" id="readingScoreInput" name="reading score"
+                                placeholder="Enter Reading Score" min='0' max='100' required/>
+                        </div>
+                    </div>
+
+                    <div class="text-center mt-4">
+                        <input class="btn btn-primary btn-lg" type="submit" value="Predict Math Score" />
+                    </div>
+
+                </form>
+
+                {% if results is defined %}
+                <div class="result-box text-center mt-4">
+                    <h2>
+                        Predicted Math Score: <strong>{{ results }}</strong>
+                    </h2>
+                </div>
+                {% endif %}
             </div>
-
-            <div class="mb-3">
-                <label class="form-label" for="parentalEducationSelect">Parental Level of Education</label>
-                <select class="form-control" id="parentalEducationSelect" name="parental level of education" {# Added id, linked label #}
-                    required>
-                    <option class="placeholder" selected disabled value="">Select Parent Education</option>
-                    <option value="associate's degree">associate's degree</option>
-                    <option value="bachelor's degree">bachelor's degree</option>
-                    <option value="high school">high school</option>
-                    <option value="master's degree">master's degree</option>
-                    <option value="some college">some college</option>
-                    <option value="some high school">some high school</option>
-                </select>
-            </div>
-
-            <div class="mb-3">
-                <label class="form-label" for="lunchSelect">Lunch Type</label>
-                <select class="form-control" id="lunchSelect" name="lunch" required> {# Added id, linked label #}
-                    <option class="placeholder" selected disabled value="">Select Lunch Type</option>
-                    <option value="free/reduced">free/reduced</option>
-                    <option value="standard">standard</option>
-                </select>
-            </div>
-
-            <div class="mb-3">
-                <label class="form-label" for="testCourseSelect">Test preparation Course</label>
-                <select class="form-control" id="testCourseSelect" name="test preparation course" {# Added id, linked label #}
-                    required>
-                    <option class="placeholder" selected disabled value="">Select Test_course</option>
-                    <option value="none">None</option>
-                    <option value="completed">Completed</option>
-                </select>
-            </div>
-
-            {# Assuming Math score is the target, only input Reading and Writing scores #}
-
-            <div class="mb-3">
-                <label class="form-label" for="writingScoreInput">Writing Score out of 100</label>
-                <input class="form-control" type="number" id="writingScoreInput" name="writing score" {# Added id, linked label #}
-                    placeholder="Enter your Writing score" min='0' max='100' required/> {# Corrected placeholder, Added required #}
-            </div>
-
-            <div class="mb-3">
-                <label class="form-label" for="readingScoreInput">Reading Score out of 100</label>
-                <input class="form-control" type="number" id="readingScoreInput" name="reading score" {# Added id, linked label #}
-                    placeholder="Enter your Reading Score" min='0' max='100' required/> {# Added id, linked label, Added required #}
-            </div>
-
-            <div class="mb-3">
-                {# Removed 'required' from submit button as it requires all form fields to be valid first,
-                   relying on individual input 'required' is more standard #}
-                <input class="btn btn-primary" type="submit" value="Predict your Maths Score" />
-            </div>
-
-        </form>
-
-        {# Ensure the 'results' variable is passed to the template context from Flask #}
-        {% if results is defined %}
-            <h2>
-                The predicted Math Score is: {{ results }} {# Improved clarity of output #}
-            </h2>
-        {% endif %}
-
+        </div>
+        <footer class="text-center mt-4 mb-4">
+            <p>&copy; 2024 Student Performance Prediction</p>
+        </footer>
     </div>
 
-    {# Add Bootstrap JS if needed for components, though not strictly necessary for this form structure #}
-    </body>
+    <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
 </html>
